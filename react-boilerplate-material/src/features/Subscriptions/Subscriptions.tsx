@@ -6,13 +6,22 @@ import { ISubActionTypes, ISubActionCreator, ISubState } from
 
 
 function Subscriptions(){
-    const store = useStore();
-    const dispatch = useDispatch();
+    // const store = useStore();
+    // const dispatch = useDispatch();
 
-    // dispatch({ type : ISubActionTypes.ADD});
+    // // store.subscriptions
+    // // dispatch({ type : ISubActionTypes.ADD});
+
+    // return (
+    //     <Grid container spacing={2}>
+    //         <Grid justifyContent="space-between">
+
+    //         </Grid>
+    //     </Grid>
+    // );
     return (
         <div>
-         "Subscriptions"   
+            Subscriptions
         </div>
     );
 }
