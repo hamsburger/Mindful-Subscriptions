@@ -1,0 +1,5 @@
+#!usr/bin/env bash
+
+# Short bash script to activate your virtual environment ($1 is the placeholder)
+# for the virtual environment
+source $1/Scripts/activate

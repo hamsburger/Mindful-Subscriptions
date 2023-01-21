@@ -1,0 +1,13 @@
+  // "husky": {
+  //   "hooks": {
+  //     "pre-commit": [
+  //       "lint-staged"
+  //     ]
+  //   }
+  // },
+  // "lint-staged": {
+  //   "*.{ts,tsx}": [
+  //     "npm run lint",
+  //     "prettier --write"
+  //   ]
+  // }
