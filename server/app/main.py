@@ -59,3 +59,15 @@ async def get_co():
         return_likelihoods="NONE",
     )
     return {"prompt": prompt, "response": response.generations[0].text}
+
+# Fetch mock response data
+@app.get("/test_mock")
+async def get_mock():
+    with open("../mock_res.json", "r") as f:
+        response = json.load(f)
+        return response
+
+# Post csv file
+@app.post("/statement")
+async def post_statement():
+    pass
