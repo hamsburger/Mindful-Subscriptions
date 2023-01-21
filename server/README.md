@@ -3,7 +3,7 @@
 ## How to Run
 - Create a `.env` file in root and paste in your [Cohere API key]() as `COHERE_API_KEY=...`
 - Create a `venv` and `pip` install all dependencies in `requirements.txt`
-- Run the BE using `uvicorn main:app --reload`
+- Run the BE using `python -m uvicorn main:app --reload`
   - `--reload` flag ensure FastAPI refreshes every time you make changes
 
 ## Linting with flake8-black

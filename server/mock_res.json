@@ -1,0 +1,38 @@
+{
+  "0": {
+    "company": "spotify",
+    "cost": 4.99,
+    "status": "active",
+    "currency": "cad",
+    "freq": "monthly",
+    "creation_dt": "2023-01-01",
+    "lastest_payment_dt": "2023-01-21",
+    "next_payment_dt": "2023-02-21",
+    "student_plan_b": 1,
+    "student_plan_url": "https://www.spotify.com/ca-en/student/"
+  },
+  "1": {
+    "company": "GoDaddy",
+    "cost": 21.99,
+    "status": "active",
+    "currency": "cad",
+    "freq": "monthly",
+    "creation_dt": "2023-01-01",
+    "lastest_payment_dt": "2023-01-04",
+    "next_payment_dt": "2024-01-04",
+    "student_plan_b": 0,
+    "student_plan_url": ""
+  },
+  "2": {
+    "company": "Netflix",
+    "cost": 14.99,
+    "status": "inactive",
+    "currency": "cad",
+    "freq": "monthly",
+    "creation_dt": "2023-01-01",
+    "lastest_payment_dt": "2023-01-04",
+    "next_payment_dt": "2024-01-04",
+    "student_plan_b": 0,
+    "student_plan_url": ""
+  }
+}
