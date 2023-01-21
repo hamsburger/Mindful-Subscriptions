@@ -1,18 +1,21 @@
 import os
 import cohere
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, status
+from typing import Union
+from fastapi import FastAPI, HTTPException, status, Query
+
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import string
 import json
+
+from qa.bot import GroundedQaBot
 
 app = FastAPI(
     title="UofT Hack Backend API",
     description="",
     version="1",
 )
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,7 +29,20 @@ app.add_middleware(
 load_dotenv()
 # Get Cohere API key from os.env
 co = cohere.Client(os.getenv("COHERE_API_KEY", default=None))
+# Get cohere and serp api keys and 
+bot = GroundedQaBot(os.getenv("COHERE_API_KEY", default=None), os.getenv("SERP_API_KEY", default=None))
 
+@app.get("/cohere_qa_bot")
+async def get_subscription_pricing_plans(q: Union[str, None] = Query(default=None, max_length=50)):
+    # question = input("question: ")
+    question =  "what are the pricing plans for "+ q + "?"
+    print(question)
+    reply, source_urls, source_texts = bot.answer(question, verbosity=0, n_paragraphs=2)
+    sources_str = "\n".join(list(set(source_urls)))
+    reply_incl_sources = f"{reply}\nSource:\n{sources_str}"
+    print("answer: " + reply_incl_sources)
+    response = reply_incl_sources
+    return {"question": question, "response": response}
 
 class HTTPError(BaseModel):
     detail: str
@@ -35,7 +51,6 @@ class HTTPError(BaseModel):
         schema_extra = {
             "example": {"detail": "HTTPException raised."},
         }
-
 
 @app.get("/")
 async def get_root():
