@@ -6,3 +6,4 @@ src/@types/index.d.ts
 src/reportWebVitals.ts
 node_modules
 .github
+*

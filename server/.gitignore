@@ -108,6 +108,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+/server/subscriptionEnv
 env/
 venv/
 ENV/

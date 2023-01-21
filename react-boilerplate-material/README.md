@@ -2,6 +2,8 @@
 
 A simple react boilerplate apps built with React Typescript, redux and Material Ui.
 
+## Errors
+If there are any build errors, try running npm audit fix --force to resolve. 
 ## Working application
 
 Check out the live application -> https://xenodochial-tereshkova-b7625c.netlify.app/
