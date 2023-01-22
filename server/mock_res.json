@@ -34,5 +34,17 @@
     "next_payment_dt": "2024-01-04",
     "student_plan_b": 0,
     "student_plan_url": ""
-  }
+  },
+  "3": {
+    "company": "Youtube",
+    "cost": 14.99,
+    "status": "active",
+    "currency": "cad",
+    "freq": "monthly",
+    "creation_dt": "2023-01-01",
+    "lastest_payment_dt": "2023-01-04",
+    "next_payment_dt": "2023-01-22",
+    "student_plan_b": 0,
+    "student_plan_url": ""
+}
 }
