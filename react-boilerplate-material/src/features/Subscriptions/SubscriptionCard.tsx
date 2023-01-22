@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
@@ -12,11 +12,13 @@ import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import LocalAirportIcon from '@mui/icons-material/LocalAirport';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CircularProgress from '@mui/material/CircularProgress';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { ISubActionTypes, ISubActionCreator, ISubState } from 'models/ISubscriptions';
+import { useMountedLayoutEffect } from 'react-table';
 
 function GetRandomIcon(){
     let num = Math.floor(Math.random() * 6);
@@ -39,6 +41,8 @@ function GetRandomIcon(){
 
 function SubscriptionCard({ subscription, edit, deletion, setTrackEdit, setOpen } ){
     const dispatch = useDispatch();
+    const [isHidden, setHidden] = useState(true);
+    const [response, setResponse] = useState("");
 
     const editClick = () => {
         setOpen(true);
@@ -51,6 +55,12 @@ function SubscriptionCard({ subscription, edit, deletion, setTrackEdit, setOpen 
     const deleteAction = (company) => (dispatch) => {
         dispatch({ type: ISubActionTypes.DELETE, payload: { "company" : company}})
     }
+    
+    useEffect(() => {
+        fetch(`http://localhost:8000/cohere_qa_bot?q=${subscription["company"]}`)
+        .then(response => response.json())
+        .then(json => setResponse(json["response"]))
+    }, [])
 
     return <Grid item xs={12} sx={{
         paddingX: 2,
@@ -61,25 +71,24 @@ function SubscriptionCard({ subscription, edit, deletion, setTrackEdit, setOpen 
             paddingY: 2
         }}>
             <Grid container item xs={12} justifyContent="space-between">
-                <Grid container item flexDirection="column" xs={8}>
-                    <Grid container item flexDirection="row" justifyContent="flex-start">
-                        <Grid item xs={1.5}>
-                            { (edit) && 
-                                <Button onClick={
-                                    editClick
-                                }
-                                startIcon={<RemoveCircleIcon sx={{ color: "orange" }}></RemoveCircleIcon>}>                                    
-                                </Button>}
-                            { (deletion) && 
-                                <Button onClick={
-                                    deleteClick
-                                }
-                                startIcon={<DeleteIcon sx={{ color: "red" }}></DeleteIcon>}></Button>}
-                        </Grid>
+                <Grid container item flexDirection="column" justifyContent="space-between" xs={8}>
+                    <Grid container item flexDirection="row" justifyContent="flex-start">    
+                        { (edit) && 
+                            <Grid item xs={1.2}>
+                            <Button onClick={
+                                editClick
+                            }
+                            startIcon={<RemoveCircleIcon sx={{ color: "orange", fontSize: "40px"}}></RemoveCircleIcon>}>                                    
+                            </Button></Grid>}
+                        { (deletion) && 
+                            <Grid item xs={1.2}><Button onClick={
+                                deleteClick
+                            }
+                            startIcon={<DeleteIcon sx={{ color: "red", fontSize: "40px"}}></DeleteIcon>}></Button></Grid>}
                         <Grid item xs={2}>
-                        <Typography variant="h2">
-                            {subscription["company"]}
-                        </Typography>
+                            <Typography variant="h2">
+                                {subscription["company"]}
+                            </Typography>
                         </Grid>
                     </Grid>
                     <Grid item>
@@ -90,6 +99,14 @@ function SubscriptionCard({ subscription, edit, deletion, setTrackEdit, setOpen 
                             backgroundColor: "white",
                         }}/>
                     </Grid>
+                    
+                    {
+                        (!isHidden) && <Grid item>
+                        {!response && 
+                              <CircularProgress/> || <Typography>{response}</Typography>
+                           }
+                        </Grid>
+                    }
                     <Grid container item justifyContent="space-between">
                         <Grid item>
                             {`Last Payment: ${subscription["lastest_payment_dt"]}`}
@@ -111,6 +128,11 @@ function SubscriptionCard({ subscription, edit, deletion, setTrackEdit, setOpen 
                         <Typography variant="h5" fontWeight={600}>
                         {`$${subscription["cost"]} ${subscription["currency"].toUpperCase()} ${subscription["freq"]}`}
                         </Typography>
+                    </Grid>
+                    <Grid item>
+                            <Button onClick={() => setHidden(!isHidden)}>
+                                Toggle Pricing Intel
+                            </Button>
                     </Grid>
                 </Grid>
             </Grid>

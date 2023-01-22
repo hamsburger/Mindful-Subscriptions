@@ -28,6 +28,7 @@ function Subscriptions(){
     const [deletion, setDelete] = useState(false);
     const [localStore, setStore] = useState(store.getState());
     const [open, setOpen] = useState(false);
+    const [sortToggle, setSortToggle] = useState(false);
     const dispatch = useDispatch();
     // store.subscriptions
     // dispatch({ type : ISubActionTypes.ADD});
@@ -41,6 +42,11 @@ function Subscriptions(){
 
     const editAction = (payload) => (dispatch) => {
         dispatch({ type: ISubActionTypes.EDIT, payload: payload})
+    }
+
+    const sortAction = (isAscending) => (dispatch) => {
+        dispatch({ type: (isAscending) ? ISubActionTypes.SORT_ASCENDING
+                        : ISubActionTypes.SORT_DESCENDING, payload: {}})
     }
 
 
@@ -162,6 +168,7 @@ function Subscriptions(){
                             <Button onClick={() => { setAdd(true); setDelete(false); setEdit(false); setOpen(true) } }>Add</Button>
                             <Button onClick={() => { setAdd(false); setDelete(false); setEdit(true) } }>Edit</Button>
                             <Button onClick={() => { setAdd(false); setDelete(true); setEdit(false) } }>Delete</Button>
+                            <Button onClick={() => { dispatch(sortAction(sortToggle)); setSortToggle(!sortToggle) }}>Sort</Button>
                         </ButtonGroup>
                     </Grid>
                     <Grid item>

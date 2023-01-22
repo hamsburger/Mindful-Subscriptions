@@ -50,8 +50,8 @@ const initialState : ISubState = {
 // IN THE FUTURE: Produce multiple subscription reports 
 const reducer = (state = initialState, { type, payload } : ISubActionCreator) => {
     let newState;
-    console.log(state)
-    console.log(payload);
+    // console.log(state)
+    // console.log(payload);
     switch(type){
         case ISubActionTypes.ADD:
             newState = { 
@@ -85,6 +85,16 @@ const reducer = (state = initialState, { type, payload } : ISubActionCreator) =>
             }
             return newState;
         
+        case ISubActionTypes.SORT_DESCENDING:
+            newState = [...state.data]
+            newState.sort((a, b) => (a["cost"] > b["cost"] ? -1 : 1));
+            return { "data" : newState };
+    
+        case ISubActionTypes.SORT_ASCENDING:
+            newState = [...state.data]
+            newState.sort((a, b) => (a["cost"] < b["cost"] ? -1 : 1));
+            return { "data" : newState };
+
         case ISubActionTypes.REVERT:
             return JSON.parse(localStorage.getItem("data") || "{}");
         
