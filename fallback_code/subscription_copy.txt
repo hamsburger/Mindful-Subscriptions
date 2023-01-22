@@ -1,0 +1,70 @@
+import React, { useState } from 'react';
+import { useDispatch, useStore } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { ISubActionTypes, ISubActionCreator, ISubState } from 
+'models/ISubscriptions';
+// import Grid from '@mui/material/Grid';
+// import TextField from '@mui/material/TextField';
+// import InputLabel from '@mui/material/InputLabel';
+// import InputAdornment from '@mui/material/InputAdornment';
+// import FormControl from '@mui/material/FormControl';
+// import Paper from '@mui/material/Paper';
+// import Button from '@mui/material/Button';
+// import ButtonGroup from '@mui/material/ButtonGroup';
+// import SearchIcon from '@mui/icons-material/Search';
+
+// import SubscriptionCard from "./SubscriptionCard";
+
+
+function Subscriptions(){
+    // const store = useStore();
+    // const dispatch = useDispatch();
+    // store.subscriptions
+    // dispatch({ type : ISubActionTypes.ADD});
+
+    return (
+    <div>
+        "Hi"
+    </div>
+    );
+        // <Grid container spacing={2}
+        // sx={{
+        //     paddingX: 3,
+        //     paddingY: 3,
+        // }}>
+        //     <Grid item container justifyContent="space-between" direction="row" flexWrap="nowrap" xs={12}>
+        //         <Grid item>
+        //             <ButtonGroup variant="contained">
+        //                 <Button>Add</Button>
+        //                 <Button>Edit</Button>
+        //                 <Button>Delete</Button>
+        //             </ButtonGroup>
+        //         </Grid>
+        //         <Grid item>
+        //             <TextField
+        //                 id="input-with-icon-textfield"
+        //                 label="TextField"
+        //                 InputProps={{
+        //                 startAdornment: (
+        //                     <InputAdornment position="start">
+        //                     <SearchIcon/>
+        //                     </InputAdornment>
+        //                 ),
+        //                 }}
+        //                 variant="standard"
+        //             />
+        //         </Grid>
+        //     </Grid>
+        //     {/* <Grid container spacing={2}>
+        //         {
+        //             Object.entries(store.getState().subscriptions).map(([key, value]) => (
+        //                 <SubscriptionCard/>
+        //             ))
+        //         }       
+                   
+        //     </Grid> */}
+            
+        // </Grid>
+}
+
+export default Subscriptions;

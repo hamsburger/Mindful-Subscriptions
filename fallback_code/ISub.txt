@@ -9,7 +9,7 @@ export const ISubActionTypes = {
 };
 
 export type ISubState = {
-    data : Array<Object>;
+    data : Object;
 }
 
 export type ISubActionCreator = {
