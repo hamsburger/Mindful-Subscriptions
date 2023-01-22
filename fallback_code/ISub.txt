@@ -5,13 +5,11 @@ export const ISubActionTypes = {
     DELETE: 'SUBSCRIPTION/DELETE',
     EDIT: "SUBSCRIPTION/EDIT", 
     REVERT: "SUBSCRIPTION/REVERT",
-    SAVE: "SUBSCRIPTION/SAVE",
-    SORT_DESCENDING: "SUBSCRIPTION/SORT_DESCENDING",
-    SORT_ASCENDING: "SUBSCRIPTION/SORT_ASCENDING"
+    SAVE: "SUBSCRIPTION/SAVE"
 };
 
 export type ISubState = {
-    data : Array<Object>;
+    data : Object;
 }
 
 export type ISubActionCreator = {

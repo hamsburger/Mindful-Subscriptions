@@ -1,4 +1,4 @@
-// @ts-nocheck
+/* eslint-disable */
 
 import { ISubActionTypes, ISubActionCreator, ISubState } from 'models/ISubscriptions';
 
@@ -46,18 +46,16 @@ const initialState : ISubState = {
 
 // Assume one person can only have one account per company.
 
-
 // IN THE FUTURE: Produce multiple subscription reports 
 const reducer = (state = initialState, { type, payload } : ISubActionCreator) => {
     let newState;
-    // console.log(state)
-    // console.log(payload);
+
     switch(type){
         case ISubActionTypes.ADD:
             newState = { 
                 ...(state),
                 data: [
-                    ...state.data,
+                    ...(Object.values(state.data)),
                     payload
                 ]
             }
@@ -67,7 +65,7 @@ const reducer = (state = initialState, { type, payload } : ISubActionCreator) =>
             newState = {
                 ...(state),
                 data: [
-                    ...state.data.filter(subscription => subscription["company"] !== payload["company"])
+                    ...(Object.values(state.data).filter(subscription => subscription["company"] !== payload["company"]))
                 ]
             }
             return newState;
@@ -75,7 +73,7 @@ const reducer = (state = initialState, { type, payload } : ISubActionCreator) =>
             newState = {
                 ...(state),
                 data : [
-                    ...state.data.map(subscription => {
+                    Object.values(state.data).map(subscription => {
                         return (
                             subscription["company"] === payload["company"] 
                             ? payload : subscription
@@ -85,24 +83,11 @@ const reducer = (state = initialState, { type, payload } : ISubActionCreator) =>
             }
             return newState;
         
-        case ISubActionTypes.SORT_DESCENDING:
-            newState = [...state.data]
-            newState.sort((a, b) => (a["cost"] > b["cost"] ? -1 : 1));
-            return { "data" : newState };
-    
-        case ISubActionTypes.SORT_ASCENDING:
-            newState = [...state.data]
-            newState.sort((a, b) => (a["cost"] < b["cost"] ? -1 : 1));
-            return { "data" : newState };
-
         case ISubActionTypes.REVERT:
             return JSON.parse(localStorage.getItem("data") || "{}");
         
         case ISubActionTypes.SAVE:
             return localStorage.setItem("data", JSON.stringify(newState));
-
-        default:
-            return state;
     }
 };
 
