@@ -1,6 +1,5 @@
-# Private bank statement
-mock_statement_1.csv
-mock_statement_2.csv
+# Private data
+data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
